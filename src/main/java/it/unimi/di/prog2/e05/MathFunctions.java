@@ -32,4 +32,17 @@ public class MathFunctions {
    *
    * Hint: https://en.wikipedia.org/wiki/Bisection_method
    */
+
+   /**
+    * prende in input:
+    * @param x un double
+    * @return un'approssimazione della sua radice
+    */
+  public static double SquareRoot(double x) {
+    if (x<0)
+      throw new IllegalArgumentException("Numero non positivo");
+    if (x==0||x==1) {
+      return x;
+    }
+  }
 }

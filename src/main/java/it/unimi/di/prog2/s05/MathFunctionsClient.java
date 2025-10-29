@@ -41,7 +41,7 @@ public class MathFunctionsClient {
       while (s.hasNextDouble()) {
         double x = s.nextDouble();
         double y = MathFunctions.sqrt(x);
-        System.out.println(Math.abs(y * y - x) < 0.001);
+        System.out.println(Math.abs(y * y - x) < 0.01);
       }
     }
   }

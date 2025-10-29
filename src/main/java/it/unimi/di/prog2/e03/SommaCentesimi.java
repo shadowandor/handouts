@@ -21,15 +21,32 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e03;
 
-/** Classe per la somma di importi in centesimi. */
+import java.math.BigDecimal;
+import java.util.Scanner;
+/**
+ * ASDGASOGJNASKJ
+ */
 public class SommaCentesimi {
-
-  /** Costruttore privato per impedire l'istanziazione. */
-  private SommaCentesimi() {}
-
-  /**
-   * Scrivere il metodo main che legga dal flusso di ingresso un elenco di importi in euro e
-   * centesimi (uno per riga, con la parte decimale separata dalla parte intera da un punto) e ne
-   * emetta nel flusso d'uscita la somma.
-   */
+    /** DFZGSDFGHSD*/
+    private SommaCentesimi() {}
+    /**
+     * ASGDFFAG
+     * @param args AGSDCASG
+     */
+    public static void main(String[] args) {
+        BigDecimal total = BigDecimal.ZERO;
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            if (line.isEmpty()) break; // se riga vuota, termina
+            try {
+                BigDecimal valore = new BigDecimal(line);
+                total = total.add(valore);
+            } catch (NumberFormatException e) {
+                System.out.println("Formato non valido: " + line);
+            }
+        }
+        System.out.println(total);
+        sc.close();
+    }
 }

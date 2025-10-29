@@ -21,14 +21,42 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e05;
 
+import java.util.Scanner;
+import java.util.Arrays;
+
 /** Client for the {@link ArrayUtils} class. */
 public class ArrayUtilsClient {
 
-  /** . */
+  /** Impedisce la instanzazione */
   private ArrayUtilsClient() {}
 
   /*
    * Write a client that reads 10 integers in increasing order from the standard input and prints
    * the index of the integer passed as argument on the command line if found.
    */
+  
+   /**
+    * MAMMT
+    * @param args MMM
+    * SDFASF
+    */
+  public static void main(String[] args) {
+    int[] array = new int[10];
+    try (Scanner sc = new Scanner(System.in)) {
+      for (int i = 0; i < array.length; i++) {
+        if (sc.hasNextInt()) {
+          array[i] = sc.nextInt();
+        }else{
+          return;
+        }
+      }
+    }
+    int val = Integer.parseInt(args[0]);
+    Arrays.sort(array);
+    int x = ArrayUtils.binarySearch(array, val);
+    if (x >= 0) {
+      System.out.println(x);
+    }
+  }
+
 }

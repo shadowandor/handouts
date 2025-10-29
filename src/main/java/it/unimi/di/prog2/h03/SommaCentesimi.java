@@ -38,11 +38,18 @@ public class SommaCentesimi {
    */
   public static void main(String[] args) {
     double total = 0;
-    try (Scanner sc = new Scanner(System.in)) {
-      while (sc.hasNextDouble()) {
-        total += sc.nextDouble();
+    Scanner sc = new Scanner(System.in);
+    while (sc.hasNextLine()) {
+      String line = sc.nextLine();
+      if (line.isEmpty()) break; // se riga vuota, termina
+      try {
+        double valore = Double.parseDouble(line);
+        total += valore;
+      } catch (NumberFormatException e) {
+        System.out.println("Formato non valido: " + line);
       }
-      System.out.println(total);
     }
+    System.out.println(total);
+    sc.close();
   }
 }

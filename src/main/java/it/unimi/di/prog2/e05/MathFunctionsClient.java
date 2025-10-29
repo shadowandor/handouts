@@ -21,6 +21,8 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e05;
 
+import java.util.Scanner;
+
 /** Client for the {@link MathFunctions} class. */
 public class MathFunctionsClient {
 
@@ -31,4 +33,26 @@ public class MathFunctionsClient {
    * (when possible), and prints {@code true} or {@code false} depending on whether the result is
    * correct within {@code 10^-3} or not.
    */
+  /**
+   * prende 
+   * @param args AFKJNSKJGN
+   */
+  public static void main(String[] args) {
+    final double EPSILON = 1e-3;
+
+    try (Scanner sc = new Scanner(System.in)) {
+      while (sc.hasNextDouble()) {
+        double x = sc.nextDouble();
+        if (x < 0) {
+          // radice non definita per numeri negativi
+          System.out.println("false");
+          continue;
+        }
+
+        double y = MathFunctions.SquareRoot(x);
+        boolean corretto = Math.abs(y * y - x) < EPSILON;
+        System.out.println(corretto);
+      }
+    }
+  }
 }

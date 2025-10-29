@@ -24,7 +24,7 @@ package it.unimi.di.prog2.e05;
 /** Classe di metodi di utilità per array. */
 public class ArrayUtils {
 
-  /** . */
+  /** costruttore privato */
   private ArrayUtils() {}
 
   /*
@@ -33,4 +33,33 @@ public class ArrayUtils {
    *
    * Hint: https://research.google/blog/extra-extra-read-all-about-it-nearly-all-binary-searches-and-mergesorts-are-broken/
    */
+
+   /**
+   * Restituisce l'indice di {@code value} se è presente in {@code a},
+   * altrimenti restituisce -1.
+   *
+   * @param a array di interi ordinato in modo crescente
+   * @param value valore da cercare
+   * @return indice del valore se trovato, altrimenti -1
+   */
+  public static int binarySearch(int[] a, int value) {
+    int low = 0;
+    int high = a.length - 1;
+
+    while (low <= high) {
+      // calcolo medio “sicuro” per evitare overflow
+      int mid = low + ((high - low) >>> 1);
+
+      if (a[mid] < value) {
+        low = mid + 1;
+      } else if (a[mid] > value) {
+        high = mid - 1;
+      } else {
+        return mid; // trovato
+      }
+    }
+
+    // non trovato
+    return -1;
+  }
 }
