@@ -34,16 +34,38 @@ public class MathFunctions {
    */
 
    /**
-    * prende in input:
+    * prende in input: un double e restituisce la sua radice approssimata
     * @param x un double
     * @return un'approssimazione della sua radice
     */
   public static double SquareRoot(double x) {
     if (x<0)
       throw new IllegalArgumentException("Numero non positivo");
+    //Casi base
     if (x==0||x==1) {
       return x;
     }
-    return x;
+    //Altro
+    double low = 0;
+    double high = (x < 1) ? 1 : x;
+    double mid = 0;
+
+    while (true) {
+      mid = (low + high) / 2.0;
+      double quadrato = mid * mid;
+      double diff = quadrato - x;
+
+      if (Math.abs(diff) < 1e-6) {
+        break;  //Evita che si generino errori dovuti alla sensibilià del programma
+      }
+
+
+      if (diff > 0) {
+        high = mid;
+      }else{
+        low = mid;
+      }
+    }
+    return mid;
   }
 }

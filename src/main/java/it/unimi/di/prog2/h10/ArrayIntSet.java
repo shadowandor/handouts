@@ -143,4 +143,5 @@ public class ArrayIntSet {
     if (size == 0) throw new IllegalStateException("Can't choose from an empty set");
     return els[0];
   }
+
 }
