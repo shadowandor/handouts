@@ -24,14 +24,14 @@ package it.unimi.di.prog2.e03;
 import java.math.BigDecimal;
 import java.util.Scanner;
 /**
- * Classe per la somma di centesimi
+ * Classe per la somma di importi in centesimi
  */
 public class SommaCentesimi {
     /**.*/
     private SommaCentesimi() {}
     /**
-     * Metodo che restituisce la somma di n centesimi passati da riga di comando
-     * @param args n centesimi da sommare
+     * Legge da standard input degli importi in euro e centesimi e ne restituisce la somma.
+     * @param args parametri passati da riga di comando (vengono ignorati)
      */
     public static void main(String[] args) {
         BigDecimal total = BigDecimal.ZERO;

@@ -27,7 +27,7 @@ import java.util.Arrays;
 /** Client for the {@link ArrayUtils} class. */
 public class ArrayUtilsClient {
 
-  /** Impedisce la instanzazione */
+  /**.*/
   private ArrayUtilsClient() {}
 
   /*

@@ -23,7 +23,7 @@ package it.unimi.di.prog2.e03;
 
 /** Classe per la verifica dell'uguaglianza tra frazioni. */
 public class UguaglianzaFrazioni {
-  /** Costruttore privato per impedire l'istanziazione. */
+  /**.*/
   private UguaglianzaFrazioni() {}
 
   /*
@@ -33,9 +33,11 @@ public class UguaglianzaFrazioni {
    */
 
   /**
-   * AGTAGA
-   * @param args AGAS
-   * ASDGA
+   * Riceve da riga di comando 4 interi corrispondenti rispettivamente a numeratore e denominatore di due frazioni.
+   * Restituisce nel flusso di uscita:
+   * "Uguali" se le frazioni sono uguali;
+   * "Diverse" in caso contrario.
+   * @param args i 4 interi
    */
   public static void main(String[] args) {
     int a = Integer.parseInt(args[0]);
