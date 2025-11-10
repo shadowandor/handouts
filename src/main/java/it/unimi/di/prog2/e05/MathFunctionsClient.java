@@ -34,11 +34,13 @@ public class MathFunctionsClient {
    * correct within {@code 10^-3} or not.
    */
   /**
-   * prende 
-   * @param args AFKJNSKJGN
+   * reads a sequence of floating-point numbers from standard input, computes their square root
+   * (when possible), and prints {@code true} or {@code false} depending on whether the result is
+   * correct within {@code 10^-3} or not.
+   * 
+   * @param args ignored
    */
   public static void main(String[] args) {
-    final double EPSILON = 1e-3;
 
     try (Scanner sc = new Scanner(System.in)) {
       while (sc.hasNextDouble()) {
@@ -48,10 +50,8 @@ public class MathFunctionsClient {
           System.out.println("false");
           continue;
         }
-
         double y = MathFunctions.SquareRoot(x);
-        boolean corretto = Math.abs(y * y - x) < EPSILON;
-        System.out.println(corretto);
+        System.out.println(Math.abs(y * y - x) < 1e-3);
       }
     }
   }

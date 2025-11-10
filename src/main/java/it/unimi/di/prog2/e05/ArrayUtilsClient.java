@@ -36,14 +36,14 @@ public class ArrayUtilsClient {
    */
   
    /**
-    * MAMMT
-    * @param args MMM
-    * SDFASF
+    * Reads 10 integers in increasing order from the standard input and prints
+    * the index of the integer passed as argument on the command line if found.
+    * @param args the integer to search.
     */
   public static void main(String[] args) {
     int[] array = new int[10];
     try (Scanner sc = new Scanner(System.in)) {
-      for (int i = 0; i < array.length; i++) {
+      for (int i = 0; i < 10; i++) {
         if (sc.hasNextInt()) {
           array[i] = sc.nextInt();
         }else{
@@ -51,9 +51,8 @@ public class ArrayUtilsClient {
         }
       }
     }
-    int val = Integer.parseInt(args[0]);
     Arrays.sort(array);
-    int x = ArrayUtils.binarySearch(array, val);
+    int x = ArrayUtils.binarySearch(array, Integer.parseInt(args[0]));
     if (x >= 0) {
       System.out.println(x);
     }

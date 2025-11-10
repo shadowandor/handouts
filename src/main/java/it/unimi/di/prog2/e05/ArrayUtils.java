@@ -24,7 +24,7 @@ package it.unimi.di.prog2.e05;
 /** Classe di metodi di utilità per array. */
 public class ArrayUtils {
 
-  /** costruttore privato */
+  /** . */
   private ArrayUtils() {}
 
   /*
@@ -40,6 +40,7 @@ public class ArrayUtils {
    *
    * @param a array di interi ordinato in modo crescente
    * @param value valore da cercare
+   * 
    * @return indice del valore se trovato, altrimenti -1
    */
   public static int binarySearch(int[] a, int value) {

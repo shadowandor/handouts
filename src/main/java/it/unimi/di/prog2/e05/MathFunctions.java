@@ -34,10 +34,18 @@ public class MathFunctions {
    */
 
    /**
-    * prende in input: un double e restituisce la sua radice approssimata
-    * @param x un double
-    * @return un'approssimazione della sua radice
-    */
+   * Extracts (if possible) the square root of the given number.
+   *
+   * <ul>
+   *   <li><b>Requires:</b> {@literal ( x \geq 0 )}.
+   *   <li><b>Modifies:</b> nothing.
+   *   <li><b>Effects:</b> returns {@literal \( y : | y^2 - x | < 10^{-3} \)}.
+   * </ul>
+   * 
+   * @param x the number ti operate with
+   * 
+   * @return the square root of {@code x}
+   */
   public static double SquareRoot(double x) {
     if (x<0)
       throw new IllegalArgumentException("Numero non positivo");
@@ -55,7 +63,7 @@ public class MathFunctions {
       double quadrato = mid * mid;
       double diff = quadrato - x;
 
-      if (Math.abs(diff) < 1e-6) {
+      if (Math.abs(diff) < 1e-3) {
         break;  //Evita che si generino errori dovuti alla sensibilià del programma
       }
 
