@@ -62,11 +62,47 @@ public class ArrayUtils {
    * insertionPoint} (inclusive) to the end of the array, and then inserts {@code value} at {@code
    * insertionPoint}.
    */
-  static void insertAt(int[] array, int insertionPoint, int value) {}
+
+   /**
+    * Shift the elements of {@code array} to the right starting from {@code insertionPoint} (inclusive) and inset {@code value} at {@code insertionPoint}.
+    * The last element gets eliminated.
+    * Assumes {@code 0 <= insertionPoint <= array.lenght}.
+    * @param array the array to operate on
+    * @param insertionPoint the index where we have to insert the value in {@code array}
+    * @param value the value to insert
+    * @throws ArrayIndexOutOfBoundsException if {@code insertionPoint} is out of range.
+   */
+
+  static void insertAt(int[] array, int insertionPoint, int value) {
+    if (insertionPoint < 0 || insertionPoint >= array.length) {
+      throw new ArrayIndexOutOfBoundsException(insertionPoint);
+    }
+    for (int i = array.length - 1; i > insertionPoint; i--) {
+      array[i] = array[i-1];
+    }
+    array[insertionPoint] = value;
+  }
 
   /* Specify and implement a method that fills the given array with the given value. */
-  static void fill(int[] array, int value) {}
+  /**
+   * Fills the given array with the given value
+   * @param array the array to fill
+   * @param value the value to insert
+   */
+  static void fill(int[] array, int value) {
+    for (int i = 0; i < array.length; i++) {
+      array[i] = value;
+    }
+  }
 
   /* Specify and implement a method that prints the given array, one element per line. */
-  static void print(int[] array) {}
+  /**
+   * Prints the content of a given array one element per line
+   * @param array the arrray to print
+   */
+  static void print(int[] array) {
+    for (int i = 0; i < array.length; i++) {
+      System.out.println(array[i]);
+    }
+  }
 }
