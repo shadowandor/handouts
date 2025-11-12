@@ -41,6 +41,13 @@ public class MathFunctions {
     // Provide an alternative implementation based on Newton's method.
     // Hint: https://math.mit.edu/~stevenj/18.335/newton-sqrt.pdf
 
-    return 0;
+    if (x < 0) throw new IllegalArgumentException("Negative argument");
+    if (x == 0) return 0;
+    double aproximation = x / 2;
+    while (Math.abs(aproximation * aproximation - x) >= 0.00001) {
+      aproximation = (aproximation + x / aproximation) / 2;
+    }
+
+    return aproximation;
   }
 }

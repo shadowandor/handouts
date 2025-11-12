@@ -21,6 +21,8 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e06;
 
+import java.util.Scanner;
+
 /** Client code for {@link ArrayUtils}. */
 public class ArrayUtilsClient {
 
@@ -55,5 +57,29 @@ public class ArrayUtilsClient {
   }
 
   */
+  /**
+   * Reacives a size in the command line.
+   * Then initialize an array filled with {@link Integer#MAX_VALUE}.
+   * Then reads integer from standard input and insert them in the array if not already present
+   * keeps the array sorted and of the same size.
+   * Prints the array
+   * @param args the size of the array
+   */
+  public static void main(String[] args) {
+    int size = Integer.parseInt(args[0]);
+    int[] array = new int[size];
+    ArrayUtils.fill(array, Integer.MAX_VALUE);
 
+    try (Scanner sc = new Scanner(System.in)) {
+      while (sc.hasNextInt()) {
+        int value = sc.nextInt();
+        int index = ArrayUtils.binarySearch(array, value);
+        if (index < 0) {
+          int insertionPoint = -index -1;
+          if (insertionPoint < size) ArrayUtils.insertAt(array, insertionPoint, value); 
+        }
+      }
+    }
+    ArrayUtils.print(array);
+  }
 }
