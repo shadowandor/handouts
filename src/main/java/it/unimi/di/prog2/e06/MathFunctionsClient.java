@@ -21,6 +21,8 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e06;
 
+import java.util.Scanner;
+
 /** Client for the {@link MathFunctions} class. */
 public class MathFunctionsClient {
 
@@ -43,4 +45,19 @@ public class MathFunctionsClient {
   }
 
   */
+  /**
+   * Reads a sequence of floating-point numbers from standard input, computes their square root
+   * (when possible), and prints {@code true} or {@code false} depending on whether the result is
+   * correct within {@code 10^-3} or not.
+   * @param args command line arguments (ignored)
+   */
+  public static void main(String[] args) {
+    try(Scanner sc =new Scanner(System.in)) {
+      while (sc.hasNextDouble()) {
+        double x = sc.nextDouble();
+        double y = MathFunctions.sqrt(x);
+        System.out.println(Math.abs(y * y - x) < 1e-3);
+      }
+    }
+  }
 }
