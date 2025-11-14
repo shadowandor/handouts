@@ -39,10 +39,10 @@ public class ArrayIntSet implements Iterable<Integer> {
   private static final int INITIAL_CAPACITY = 16;
 
   /** The {@link List} containing this set elements. */
-  private int[] els;
+  protected int[] els;
 
   /** The number of elements in this set. */
-  private int size;
+  protected int size;
 
   /*
    * RI:

@@ -39,13 +39,31 @@ public class BoundedIntQueue {
   // Collection Framework class. An array can be used to store the elements in a
   // circular buffer (see https://www.wikiwand.com/en/articles/Circular_buffer).
 
+  /** The elements of the queque */
+  private int[] elements;
+
+  /** The index of the first queque element in {@link elements} 
+   * (-1 if the queque is empty)
+  */
+  private int top;
+
+  /** The index of the next free position in {@link elements} 
+   * (0 if the queque is empty)
+  */
+  private int bottom;
+
   /**
    * Creates a new bounded queue with the given capacity.
    *
    * @param capacity the capacity of the queue.
    * @throws IllegalArgumentException if {@code capacity} is negative.
    */
-  public BoundedIntQueue(int capacity) {}
+  public BoundedIntQueue(int capacity) {
+    if (capacity <= 0) throw new IllegalArgumentException("Capacity cn't be negative");
+    elements = new int[capacity];
+    top = -1;
+    bottom = 0;
+  }
 
   /**
    * Adds an element to the queue.
@@ -53,7 +71,12 @@ public class BoundedIntQueue {
    * @param x the element to add.
    * @throws IllegalStateException if the queue is full.
    */
-  public void enqueue(int x) {}
+  public void enqueue(int x) {
+    if (bottom == top) throw new IllegalStateException("Queque is full");
+    if (top == -1) top = 0;
+    elements[bottom] = x;
+    bottom = (bottom + 1) % elements.length;
+  }
 
   /**
    * Removes the element at the head of the queue.
@@ -62,6 +85,20 @@ public class BoundedIntQueue {
    * @throws IllegalStateException if the queue is empty.
    */
   public int dequeue() {
-    return 0;
+    if (top == -1) throw new IllegalStateException("Queque is empty");
+    int x = elements[top];
+    top = (top + 1) % elements.length;
+    if (top == bottom) {
+      top = -1;
+      bottom = 0;
+    } 
+    return x;
+  }
+
+  @Override
+  public String toString() {
+    if (top == 1) return "BoundedIntQueue: []";
+    //StringBuilder sb = new StringBuilder("BoundedQueue: [");
+    return "";
   }
 }
