@@ -101,7 +101,7 @@ public class Watch implements Iterable<Watch.Gear> {
 
   @Override
   public Iterator<Gear> iterator() {
-    // TODO Auto-generated method stub
+    // todo Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'iterator'");
   }
 

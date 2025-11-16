@@ -23,13 +23,6 @@ public class MaxArraySet extends ArrayIntSet{
      * 
      */
     
-    /**
-     * Create an empty {@link MaxArrayIntSet}
-     */
-    public MaxArrayIntSet() {
-        super();
-        bigger = 0;
-    }
 
     /**
      * Return the maximuim value of an IntSet

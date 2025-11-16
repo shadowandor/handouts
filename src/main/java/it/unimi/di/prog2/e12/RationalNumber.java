@@ -32,13 +32,22 @@ public class RationalNumber {
   // equals, hashCode, and toString methods); add methods that are adequate to
   // the specification. Provide also the RI and AF.
 
+  /** The numerator */
+  public final int numerator;
+
+  /** The denominator */
+  public final int denominator;
+
   /**
    * Creates a new rational number.
    *
    * @param numerator the numerator.
    * @param denominator the denominator.
    */
-  public RationalNumber(int numerator, int denominator) {}
+  public RationalNumber(int numerator, int denominator) {
+    this.numerator = numerator;
+    this.denominator = denominator;
+  }
 
   /**
    * Returns the sum of this rational number and another one.
@@ -47,7 +56,10 @@ public class RationalNumber {
    * @return the sum of this rational number and {@code other}.
    */
   public RationalNumber add(RationalNumber other) {
-    return null;
+    return new RationalNumber(
+      (this.numerator * other.denominator) + (other.numerator * this.denominator),
+      this.denominator * other.denominator
+      );
   }
 
   /**
@@ -57,6 +69,9 @@ public class RationalNumber {
    * @return the product of this rational number and {@code other}.
    */
   public RationalNumber mul(RationalNumber other) {
-    return null;
+    return new RationalNumber(
+      this.numerator * other.numerator,
+      this.denominator * other.denominator
+      );
   }
 }

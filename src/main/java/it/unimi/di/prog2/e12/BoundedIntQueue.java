@@ -97,8 +97,15 @@ public class BoundedIntQueue {
 
   @Override
   public String toString() {
-    if (top == 1) return "BoundedIntQueue: []";
-    //StringBuilder sb = new StringBuilder("BoundedQueue: [");
-    return "";
+    if (top == -1) return "BoundedIntQueue: []";
+    StringBuilder sb = new StringBuilder("BoundedQueue: [");
+    int i = top, n = 0;
+    while (n < ((bottom - top + elements.length) % elements.length) - 1) {
+      sb.append(elements[i] + ", ");
+      i = (i + 1) % elements.length;
+      n++;
+    }
+    sb.append( elements[i] + " ]");
+    return sb.toString();
   }
 }
