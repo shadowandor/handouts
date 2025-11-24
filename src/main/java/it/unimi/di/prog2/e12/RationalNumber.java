@@ -21,6 +21,8 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e12;
 
+import java.util.Objects;
+
 /**
  * A rational number is an immutable number that can be expressed as the quotient or fraction \( p/q
  * \) of two {@code int}s, a numerator \( p \) and a non-zero denominator \( q \).
@@ -37,6 +39,18 @@ public class RationalNumber {
 
   /** The denominator */
   public final int denominator;
+
+  /*-
+   * AF:
+   * 
+   *  - AF(numerator, denominator) = numerator/denominator
+   * 
+   * RI:
+   * 
+   * - denominator > 0
+   * - the gcd between the numerator and denominator ha to be 1
+   * 
+   */
 
   /**
    * Creates a new rational number.
@@ -73,5 +87,23 @@ public class RationalNumber {
       this.numerator * other.numerator,
       this.denominator * other.denominator
       );
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (!(obj instanceof RationalNumber other)) return false;
+    return numerator == other.numerator && denominator == other.denominator;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(numerator, denominator);
+  }
+
+  @Override
+  public String toString() {
+    if ( denominator == 1) return Integer.toString(numerator);
+    return numerator + "/" + denominator;
   }
 }

@@ -21,6 +21,8 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e12;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -37,8 +39,30 @@ public class StringToIntMap {
 
   // Note: do not use the Map in Java Collections, the point is to implement it from scratch!
 
+  /** A list containing the map keys */
+  private final List<String> keys;
+
+  /** A list containing the map values */
+  private final List<String> values;
+
+  /*-
+   * AF: 
+   * 
+   * -AF(keys, values) = a map where keys.get(i) is associated with values.get(i) for each i in [0, key.size())
+   * 
+   * RI:
+   * 
+   * -keys != NULL and daoesn't contains NULL
+   * -values != NLL and doeasn't contains NULL
+   * -keys.size() = values.size()
+   * 
+   */
+
   /** Creates a new empty map. */
-  public StringToIntMap() {}
+  public StringToIntMap() {
+    keys = new ArrayList<>();
+    values = new ArrayList<>();
+  }
 
   /**
    * Returns the size of this map.
@@ -46,7 +70,7 @@ public class StringToIntMap {
    * @return the number of key-value mappings in this map.
    */
   public int size() {
-    return 0;
+    return keys.size();
   }
 
   /**
