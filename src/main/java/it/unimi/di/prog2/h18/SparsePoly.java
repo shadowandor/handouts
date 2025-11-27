@@ -52,6 +52,7 @@ public class SparsePoly extends AbstractPoly {
    *
    * @param poly the polynomial to copy.
    * @throws NullPointerException if {@code poly} is {@code null}.
+   * @return sparse poly
    */
   public static SparsePoly copyOf(SparsePoly poly) throws NullPointerException {
     return new SparsePoly(poly.terms);
@@ -62,6 +63,7 @@ public class SparsePoly extends AbstractPoly {
    *
    * @param poly the polynomial to copy.
    * @throws NullPointerException if {@code poly} is {@code null}.
+   * @return sparse poly
    */
   public static SparsePoly copyOf(Poly poly) throws NullPointerException {
     List<Term> terms = new ArrayList<>();

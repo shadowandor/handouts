@@ -29,38 +29,83 @@ import java.util.Objects;
  */
 public class RationalNumber {
 
-  // EXERCISE: complete following the specification (with particular attention
-  // to the eventual exceptions) and provide an implementation (including the
-  // equals, hashCode, and toString methods); add methods that are adequate to
-  // the specification. Provide also the RI and AF.
-
-  /** The numerator */
+  /** The numerator. */
   public final int numerator;
 
-  /** The denominator */
+  /** The denominator. */
   public final int denominator;
 
   /*-
    * AF:
-   * 
-   *  - AF(numerator, denominator) = numerator/denominator
-   * 
+   *
+   *   AF(numerator, denominator) = numerator/denominator
+   *
    * RI:
-   * 
-   * - denominator > 0
-   * - the gcd between the numerator and denominator ha to be 1
-   * 
+   *
+   *  - denominator > 0
+   *  - gcd(numerator, denominator) == 1
+   *
    */
+
+  /**
+   * Computes the greatest common divisor of two numbers.
+   *
+   * @param a the first number.
+   * @param b the second number.
+   * @return the greatest common divisor of {@code a} and {@code b}.
+   */
+  private long gcd(long a, long b) {
+    while (b > 0) {
+      long r = a % b;
+      a = b;
+      b = r;
+    }
+    return a;
+  }
 
   /**
    * Creates a new rational number.
    *
+   * <p>The rational number is reduced to minimum terms, so the arguments of this methods are
+   * allowed to be {@code long}s and the fraction will be created if and only if the numerator and
+   * the denominator, once reduced to minimum terms, are not too large to be represented as {@code
+   * int}s.
+   *
    * @param numerator the numerator.
    * @param denominator the denominator.
+   * @throws IllegalArgumentException if {@code denominator} is zero.
+   * @throws IllegalArgumentException if the numerator or the denominator reduced to minimum terms
+   *     are too large to be represented as {@code int}s.
    */
-  public RationalNumber(int numerator, int denominator) {
-    this.numerator = numerator;
-    this.denominator = denominator;
+  public RationalNumber(long numerator, long denominator) {
+    if (denominator == 0) throw new IllegalArgumentException("denominator cannot be zero");
+    if (denominator < 0) {
+      numerator = -numerator;
+      denominator = -denominator;
+    }
+    long gcd =
+        gcd(numerator > 0 ? numerator : -numerator, denominator > 0 ? denominator : -denominator);
+    long reducedNumerator = numerator / gcd;
+    long reducedDenominator = denominator / gcd;
+    if (reducedNumerator < Integer.MIN_VALUE || reducedNumerator > Integer.MAX_VALUE)
+      throw new IllegalArgumentException(
+          "numerator (reduced to minimum terms) " + reducedNumerator + " does not fit into an int");
+    if (reducedDenominator > Integer.MAX_VALUE)
+      throw new IllegalArgumentException(
+          "denominator (reduced to minimum terms) "
+              + reducedDenominator
+              + " does not fit into an int");
+    this.numerator = (int) reducedNumerator;
+    this.denominator = (int) reducedDenominator;
+  }
+
+  /**
+   * Creates a new integer number.
+   *
+   * @param value the value.
+   */
+  public RationalNumber(int value) {
+    this(value, 1);
   }
 
   /**
@@ -71,9 +116,8 @@ public class RationalNumber {
    */
   public RationalNumber add(RationalNumber other) {
     return new RationalNumber(
-      (this.numerator * other.denominator) + (other.numerator * this.denominator),
-      this.denominator * other.denominator
-      );
+        (long) denominator * other.numerator + (long) other.denominator * numerator,
+        (long) denominator * other.denominator);
   }
 
   /**
@@ -84,26 +128,52 @@ public class RationalNumber {
    */
   public RationalNumber mul(RationalNumber other) {
     return new RationalNumber(
-      this.numerator * other.numerator,
-      this.denominator * other.denominator
-      );
+        (long) numerator * other.numerator, (long) denominator * other.denominator);
+  }
+
+  /**
+   * Tells whether this rational number is an integer.
+   *
+   * @return {@code true} if this rational number is an integer, {@code false} otherwise.
+   */
+  public boolean isInteger() {
+    return denominator == 1;
+  }
+
+  /**
+   * Tells whether this rational number is positive.
+   *
+   * @return {@code true} if this rational number is positive, {@code false} otherwise.
+   */
+  public boolean isPositive() {
+    return numerator > 0;
+  }
+
+  /**
+   * Tells whether this rational number is equal to zero.
+   *
+   * @return {@code true} if this rational number is zero, {@code false} otherwise.
+   */
+  public boolean isZero() {
+    return numerator == 0;
+  }
+
+  @Override
+  public String toString() {
+    if (denominator == 1) return Integer.toString(numerator);
+    return numerator + "/" + denominator;
   }
 
   @Override
   public boolean equals(Object obj) {
-
     if (!(obj instanceof RationalNumber other)) return false;
     return numerator == other.numerator && denominator == other.denominator;
+    // Why the following is not correct?
+    // return (double) numerator / denominator == (double) other.numerator / other.denominator;
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(numerator, denominator);
-  }
-
-  @Override
-  public String toString() {
-    if ( denominator == 1) return Integer.toString(numerator);
-    return numerator + "/" + denominator;
   }
 }

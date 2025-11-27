@@ -27,7 +27,7 @@ public class BoundedIntQueueClient {
   /** . */
   private BoundedIntQueueClient() {}
 
-  /*
+  /**
    * Tests some methods of {@link BoundedIntQueue}.
    *
    * <p>Reads a list of integers from the standard input; if a positive number is read, it is added
@@ -36,7 +36,6 @@ public class BoundedIntQueueClient {
    *
    * @param args not used.
    */
-
    public static void main(String[] args) {
     BoundedIntQueue queue = new BoundedIntQueue(10);
     try (java.util.Scanner s = new java.util.Scanner(System.in)) {

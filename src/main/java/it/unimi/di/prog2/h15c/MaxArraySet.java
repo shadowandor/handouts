@@ -4,14 +4,19 @@ import java.util.NoSuchElementException;
 
 import it.unimi.di.prog2.h13.ArrayIntSet;
 
-/**
- * A subtipe of {@link ArrayIntSet} able to return the maximum value
- */
+
+/** A subtipe of {@link ArrayIntSet} able to return the maximum value */
 public class MaxArraySet extends ArrayIntSet{
 
+    /** PALLE */
+    public MaxArraySet() {
+        super();
+    }
+
+    /**Biggger */
     private int bigger = 0;
 
-    /**
+    /*-
      * 
      * AF :
      * 

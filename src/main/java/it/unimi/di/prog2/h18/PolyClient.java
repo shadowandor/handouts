@@ -21,8 +21,16 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.h18;
 
+/** Client to the {@link Poly} class*/
 public class PolyClient {
 
+  /** . */
+  private PolyClient() {}
+  
+/**
+ * main
+ * @param args not used
+ */
   public static void main(String[] args) {
     Poly a, b;
     a = DensePoly.ofCoefficients(new int[] {0, 2, 0, 3}); // 2x + 3x^3

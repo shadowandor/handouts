@@ -59,16 +59,18 @@ public class DensePoly extends AbstractPoly {
    *
    * @param poly the polynomial to copy.
    * @throws NullPointerException if {@code poly} is {@code null}.
+   * @return a dense poly
    */
   public static DensePoly copyOf(DensePoly poly) throws NullPointerException {
     return new DensePoly(poly.coefficient);
   }
 
   /**
-   * Copies the polynomial.
+   * Copies the polynomial. 
    *
    * @param poly the polynomial to copy.
    * @throws NullPointerException if {@code poly} is {@code null}.
+   * @return a dense poli
    */
   public static DensePoly copyOf(Poly poly) throws NullPointerException {
     if (poly instanceof DensePoly dense) return copyOf(dense);

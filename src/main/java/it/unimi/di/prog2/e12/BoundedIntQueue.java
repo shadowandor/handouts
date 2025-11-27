@@ -21,6 +21,8 @@ along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
 package it.unimi.di.prog2.e12;
 
+import java.util.NoSuchElementException;
+
 /**
  * A <em>queue</em> is a mutable data structure that provides access to its elements in
  * first-in/first-out order.
@@ -45,12 +47,12 @@ public class BoundedIntQueue {
   /** The index of the first queque element in {@link elements} 
    * (-1 if the queque is empty)
   */
-  private int top;
+  private int head;
 
   /** The index of the next free position in {@link elements} 
    * (0 if the queque is empty)
   */
-  private int bottom;
+  private int tail;
 
   /**
    * Creates a new bounded queue with the given capacity.
@@ -59,10 +61,41 @@ public class BoundedIntQueue {
    * @throws IllegalArgumentException if {@code capacity} is negative.
    */
   public BoundedIntQueue(int capacity) {
-    if (capacity <= 0) throw new IllegalArgumentException("Capacity cn't be negative");
+    if (capacity <= 0) {
+      throw new IllegalArgumentException("capacity must be positive");
+    }
     elements = new int[capacity];
-    top = -1;
-    bottom = 0;
+    head = -1;
+    tail = 0;
+  }
+
+  /**
+   * Determines whether the queue is empty, i.e., it does not contain any integer.
+   *
+   * @return {@code true} if the queue is empty, {@code false} otherwise.
+   */
+  public boolean isEmpty() {
+    return head == -1;
+  }
+
+  /**
+   * Determines whether the queue is full, i.e., it contains as many integers as its capacity.
+   *
+   * @return {@code true} if the queue is full, {@code false} otherwise.
+   */
+  public boolean isFull() {
+    return tail == head;
+  }
+
+  /**
+   * Returns the number of elements in the queue.
+   *
+   * @return the number of elements.
+   */
+  public int size() {
+    if (isEmpty()) return 0;
+    if (isFull()) return elements.length;
+    return (tail - head + elements.length) % elements.length;
   }
 
   /**
@@ -72,10 +105,10 @@ public class BoundedIntQueue {
    * @throws IllegalStateException if the queue is full.
    */
   public void enqueue(int x) {
-    if (bottom == top) throw new IllegalStateException("Queque is full");
-    if (top == -1) top = 0;
-    elements[bottom] = x;
-    bottom = (bottom + 1) % elements.length;
+    if (isFull()) throw new IllegalStateException("the queue is full");
+    if (head == -1) head = 0;
+    elements[tail] = x;
+    tail = (tail + 1) % elements.length;
   }
 
   /**
@@ -85,27 +118,53 @@ public class BoundedIntQueue {
    * @throws IllegalStateException if the queue is empty.
    */
   public int dequeue() {
-    if (top == -1) throw new IllegalStateException("Queque is empty");
-    int x = elements[top];
-    top = (top + 1) % elements.length;
-    if (top == bottom) {
-      top = -1;
-      bottom = 0;
-    } 
-    return x;
+    if (isEmpty()) throw new NoSuchElementException("La coda è vuota");
+    final int r = elements[head];
+    head = (head + 1) % elements.length;
+    if (head == tail) {
+      head = -1;
+      tail = 0;
+    }
+    return r;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = 0;
+    int i = head, n = 0;
+    while (n < size()) {
+      result = 31 * result + Integer.hashCode(elements[i]);
+      i = (i + 1) % elements.length;
+      n += 1;
+    }
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof BoundedIntQueue other)) return false;
+    if (size() != other.size()) return false;
+    int i = head, j = other.head, n = 0;
+    while (n < size()) {
+      if (elements[i] != other.elements[j]) return false;
+      i = (i + 1) % elements.length;
+      j = (j + 1) % other.elements.length;
+      n += 1;
+    }
+    return true;
   }
 
   @Override
   public String toString() {
-    if (top == -1) return "BoundedIntQueue: []";
-    StringBuilder sb = new StringBuilder("BoundedQueue: [");
-    int i = top, n = 0;
-    while (n < ((bottom - top + elements.length) % elements.length) - 1) {
+    if (isEmpty()) return "BoundedIntQueue: []";
+    final StringBuilder sb = new StringBuilder("BoundedIntQueue: [");
+    int i = head, n = 0;
+    while (n < size() - 1) {
       sb.append(elements[i] + ", ");
       i = (i + 1) % elements.length;
-      n++;
+      n += 1;
     }
-    sb.append( elements[i] + " ]");
+    sb.append(elements[i] + "]");
     return sb.toString();
   }
 }
